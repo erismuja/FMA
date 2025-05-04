@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Non-Semantic HTML</title>
+  <style>
+    .box {
+        width: 300px;
+      border: 2px solid #ccc;
+      padding: 5px;
+      margin: 5px;
+      background-color: #f3eaff;
+    }
+    .nested {
+      background-color: #e6d9ff;
+      margin-left: 10px;
+    }
+    .span {
+      background-color: #fff6a1;
+      padding: 5px;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="span">&lt;span&gt;</div>
+
+    <div class="box nested">&lt;div&gt;
+      <div class="box nested">&lt;div&gt;
+        <div class="box nested">&lt;div&gt;
+          <div class="box nested">&lt;div&gt;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top: 20px;">&lt;div&gt;</div>
+  </div>
+</body>
+</html>
