@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasa Marketi - Skanim Barkodesh</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🛒 Market Lumi</h1>
+    <input type="text" id="barcode" placeholder="Shtyp ose skano barkodin..." />
+    <button onclick="addProduct()">Shto Produkt</button>
+
+    <div class="list">
+      <h2>Produkte të Skanuara:</h2>
+      <ul id="product-list"></ul>
+      <h3>Totali: <span id="total">€0.00</span></h3>
+    </div>
+
+    <div class="payment">
+      <h2>Pagesa</h2>
+      <input type="number" id="amount-paid" placeholder="Shuma e paguar €" />
+      <button onclick="calculateChange()">Llogarit Kusurin</button>
+      <h3>Kusuri: <span id="change">€0.00</span></h3>
+    </div>
+  </div>
+
+  <script>
+    const products = {
+      "123456": { name: "Ujë Rugove 1.5L", price: 0.60 },
+      "234567": { name: "Buka e Bardhë", price: 0.80 },
+      "345678": { name: "Qumësht 1L", price: 1.00 },
+      "456789": { name: "Kafe Jacobs", price: 2.50 },
+      "567890": { name: "Çipsa Lays", price: 1.20 },
+      "678901": { name: "Shampoo Head & Shoulders", price: 3.80 },
+      "789012": { name: "Pasta Colgate", price: 1.60 },
+      "890123": { name: "Detergjent Ariel", price: 4.20 },
+      "901234": { name: "Biskota", price: 1.10 },
+      "012345": { name: "Sapun Dove", price: 0.90 },
+      "112233": { name: "Coca-Cola 1.5L", price: 1.30 },
+      "445566": { name: "Birrë Peja 0.5L", price: 0.90 },
+      "778899": { name: "Banane 1kg", price: 1.50 },
+      "998877": { name: "Çokollatë Milka", price: 1.10 },
+       "77889": { name: "Banane 1kg", price: 1.30 },
+      "99887": { name: "Çokollatë Milka", price: 1.20 },
+      "4001743473980": { name: "Çokollatë zvicrre", price: 2.50 },
+     
+    };
+
+    let total = 0;
+
+    function addProduct() {
+      const code = document.getElementById("barcode").value.trim();
+      const product = products[code];
+
+      if (product) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          ${product.name} - €${product.price.toFixed(2)}
+          <button onclick="removeProduct(this, ${product.price})">Fshi</button>
+        `;
+        document.getElementById("product-list").appendChild(li);
+        total += product.price;
+        updateTotal();
+      } else {
+        alert("Produkti nuk ekziston!");
+      }
+
+      document.getElementById("barcode").value = "";
+      document.getElementById("barcode").focus();
+    }
+
+    function removeProduct(btn, price) {
+      btn.parentElement.remove();
+      total -= price;
+      updateTotal();
+    }
+
+    function updateTotal() {
+      document.getElementById("total").textContent = `€${total.toFixed(2)}`;
+    }
+
+    function calculateChange() {
+      const paid = parseFloat(document.getElementById("amount-paid").value);
+      if (isNaN(paid)) {
+        alert("Ju lutem shkruani shumën e paguar.");
+        return;
+      }
+      const change = paid - total;
+      document.getElementById("change").textContent = `€${change.toFixed(2)}`;
+    }
+    document.getElementById("barcode").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    addProduct();
+  }
+});
+
+  function calculateChange() {
+    const paid = parseFloat(document.getElementById("amount-paid").value);
+    if (isNaN(paid)) {
+      alert("Ju lutem shkruani shumën e paguar.");
+      return;
+    }
+    const change = paid - total;
+    document.getElementById("change").textContent = `€${change.toFixed(2)}`;
+  }
+
+  document.getElementById("amount-paid").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      calculateChange();
+    }
+  });
+    
+
+
+  </script>
+</body>
+</html>

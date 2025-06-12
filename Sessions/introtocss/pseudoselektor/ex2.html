@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li:first-child{
+        color: red;
+    }
+    li:last-child{
+        color: blue;
+    }
+    li:nth-child(3),li:nth-child(4){
+        font-size: 30px;
+    }
+    li:nth-child(even){
+        color: red;
+        text-decoration: overline;
+    }
+    li:nth-child(odd){
+        color: blue;
+    }
+    li:nth-child(2n+2){
+        text-decoration: line-through;/* overline,line-throught*/
+    }
+</style>
+<body>
+    <ul>
+        <li>ele1</li>
+        <li>ele2</li>
+        <li>ele3</li>
+        <li>ele4</li>
+        <li>ele5</li>
+        <li>ele6</li>
+        <li>ele7</li>
+        <li>ele8</li>
+    </ul>
+    
+</body>
+</html>

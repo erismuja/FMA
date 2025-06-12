@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding-left: 10px;
+        }/*mundeson qe ti japim stil gjitha elementeve ne html*/
+     div p{
+            background-color: red;
+
+        }/*hapsir dhe > mundson me i marr elementet brenda sti grupi*/
+        div+h2{
+            color: blue;
+        }/* permes + merr vetem elementin e pare pas div*/
+        div~p{
+            font-size: 40px;
+        }/*~ i merr te gjitha elementet qe jane pas div-it te mbyllura*/
+        div,p{
+            background-color:  green;
+        }/* mundeson qe dy apo me teper elemente te ken efekte te njejta*/
+       
+    </style>
+</head>
+<body>
+    <div class="paragrafi">
+        <h1>titulli i pare</h1>
+        <p>paragrafi i pare</p>
+        <ul>
+            <li>elementi1</li>
+            <li>elementi2</li>
+            <li>elementi3</li>
+        </ul>
+    </div>
+    <h2>titulli i dyte</h2>
+    <p>paragrafi i dyte</p>
+    <hr>
+    <p>paragrafi i trete</p>
+    
+</body>
+</html>
