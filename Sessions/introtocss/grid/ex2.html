@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+            'header header'
+            'aside main'
+            'footer footer';
+
+        }
+        
+        body{
+            display: grid;
+            grid-template-columns: 5fr 2fr;
+            grid-template-rows: 3fr 2fr;
+            grid-template-areas: 
+            'header   header'
+             'aside   main'
+             'footer  footer';
+        }
+        .header{
+        grid-area: header;
+        background-color: blue;
+        text-align: center;
+        }
+        .aside{
+            grid-area: aside;
+            background-color: aqua;
+            text-align: center;
+        }
+        .main{
+            grid-area:main;
+            background-color: blueviolet;
+            text-align: center;
+
+        }
+        .footer{
+            grid-area: footer;
+            background-color: brown;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="header">
+        <p>titulli</p>
+    </div>
+    <div class="aside">
+        <p>pjesa e dyte</p>
+    </div>
+    <div class="main">
+        <p>pjesa e trete</p>
+    </div>
+    <div class="footer">
+        <p>pjesa e katert</p>
+    </div>
+    
+    
+</body>
+</html>

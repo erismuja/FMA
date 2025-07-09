@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Layout</title>
+ <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.c1 {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "menu main aside"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 100px;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: gray;
+  padding: 20px;
+  font-weight: bold;
+  text-align: right;
+
+}
+
+.p1{
+    width: 70px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+
+}
+   
+
+
+
+
+.menu {
+  grid-area: menu;
+  background-image: url(a.jpg);
+  background-size: cover;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 50px;
+}
+
+.aside {
+  grid-area: aside;
+  background-size: cover;
+  background-image: url(a.jpg);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  grid-area: main;
+  padding: 20px;
+  background-color: white;
+  overflow-y: auto;
+  justify-content: center;
+  display: flex;
+  align-content: space-evenly;
+  background-color: lightgray;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: gray;
+  color: white;
+  padding: 20px;
+  font-weight: bold;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  background-color: lightgray;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.product {
+  background-color: gray;
+  color: white;
+  flex: 1 0 18%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  display: grid;
+  grid-template-columns: 30px;
+  box-shadow: 10px;
+  background-image: url(l.jpg);
+  
+
+
+}
+.header button{
+  color: white;
+  background-color: gray;
+  border-radius: 10px;
+  transition: 0.4s ease;
+}
+.header button:hover{
+  color: black;
+  background-color: lightgray;
+}
+
+ </style>
+</head>
+<body>
+    <img class="p1" src="l.jpg" alt="" width="70">
+  <div class="c1">
+    <header class="header">
+    <button>Main</button>  
+<a href="ex2.html"> <button >Contact</button></a></header>
+    <nav class="menu">Bar</nav>
+    <aside class="aside">Bar ju ofron plot dashuri dhe ngrohtesi</aside>
+    <main class="main">
+      <div class="products">
+        
+        <div class="product" >Makiato e Madhe</div>
+        <div  class="product">Esspreso</div>
+        <div class="product" >Nescafe</div>
+        <div class="product" >Coca Cola</div>
+        <div  class="product">Birre Peja</div>
+                <div  class="product">Sprite</div>
+        <div  class="product">Fanta</div>
+
+        <div class="product" >Lasko</div>
+        <div  class="product">Uje i thjeshte</div>
+        <div  class="product">Uje i tharpt</div>
+        
+      </div>
+    </main>
+    <footer class="footer">Miresevini</footer>
+  </div>
+</body>
+</html>

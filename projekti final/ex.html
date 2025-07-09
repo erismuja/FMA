@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Notification Bar */
+        .notification-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #6c757d;
+            color: white;
+            text-align: center;
+            padding: 6px;
+            font-size: 13px;
+            z-index: 1000;
+        }
+
+        .esc-key {
+            background-color: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin: 0 3px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid #dee2e6;
+            padding: 20px 0;
+            overflow-y: auto;
+            margin-top: 32px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 25px;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 14px;
+            height: 14px;
+            border: 2px solid white;
+            border-radius: 1px;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 25px;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .user-name {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 13px;
+            gap: 10px;
+        }
+
+        .nav-link:hover {
+            background-color: #f8f9fa;
+        }
+
+        .nav-link.active {
+            background-color: #333;
+            color: white;
+            margin: 0 10px;
+            border-radius: 6px;
+        }
+
+        .nav-icon {
+            width: 14px;
+            height: 14px;
+            background: currentColor;
+            opacity: 0.7;
+        }
+
+        .nav-section {
+            margin-top: 25px;
+            padding: 0 20px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            color: #adb5bd;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-top: 32px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 15px 25px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .breadcrumb .current {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            background: #f8f9fa;
+            width: 200px;
+            font-size: 13px;
+        }
+
+        .search-box::placeholder {
+            color: #adb5bd;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .header-icon::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #6c757d;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            overflow-y: auto;
+        }
+
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Camera Feed */
+        .camera-feed {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .camera-image-container {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .camera-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .recording-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #dc3545;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .recording-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .camera-tabs {
+            display: flex;
+            padding: 15px 20px;
+            gap: 15px;
+            background: #f8f9fa;
+        }
+
+        .camera-tab {
+            padding: 6px 15px;
+            border-radius: 15px;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .camera-tab.active {
+            background: white;
+            color: #333;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 5px;
+            color: #e91e63;
+        }
+
+        .metric-unit {
+            font-size: 14px;
+            color: #e91e63;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .weather-title {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .weather-location {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .weather-status {
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .weather-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 50px;
+            height: 35px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .weather-icon::after {
+            content: '☀️';
+        }
+
+        /* Chart */
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .chart-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+        }
+
+        .activate-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activate-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .activate-text {
+            color: #adb5bd;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .activate-value {
+            font-size: 28px;
+            font-weight: 300;
+            color: #e91e63;
+        }
+
+        .activate-unit {
+            font-size: 12px;
+            color: #adb5bd;
+        }
+
+        .settings-icon {
+            width: 18px;
+            height: 18px;
+            background: #dee2e6;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Notification Bar -->
+    <div class="notification-bar">
+        a.futureminds.io – To exit full screen, press <span class="esc-key">Esc</span>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Creative Tim</span>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">BA</div>
+            <span class="user-name">Brooklyn Alice</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    Dashboards
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    Analytics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    Discover
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <div class="nav-icon"></div>
+                    Automotive
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <div class="nav-icon"></div>
+                    Smart Home
+                </a>
+            </li>
+        </ul>
+
+        <div class="nav-section">
+            <div class="nav-section-title">PAGES</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Pages
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Account
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Applications
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Ecommerce
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Team
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="nav-icon"></div>
+                        Projects
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="breadcrumb">
+                <span>Pages</span>
+                <span>/</span>
+                <span class="current">Smart Home</span>
+            </div>
+            <div class="header-right">
+                <input type="text" class="search-box" placeholder="Search here">
+                <div class="header-icons">
+                    <div class="header-icon"></div>
+                    <div class="header-icon"></div>
+                    <div class="header-icon">
+                        <div class="notification-badge">11</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="main-panel">
+                <!-- Camera Feed -->
+                <div class="camera-feed">
+                    <div class="camera-image-container">
+                        <img src="bg-smart-home-1.jpg" alt="Kitchen Camera Feed" class="camera-image">
+                        <div class="camera-overlay">17.05.2021 4:34PM</div>
+                        <div class="recording-badge">
+                            <div class="recording-dot"></div>
+                            RECORDING
+                        </div>
+                    </div>
+                    <div class="camera-tabs">
+                        <div class="camera-tab active">Cameras</div>
+                        <div class="camera-tab">Kitchen</div>
+                        <div class="camera-tab">Living</div>
+                        <div class="camera-tab">Attic</div>
+                        <div class="camera-tab">⋯</div>
+                    </div>
+                </div>
+
+                <!-- Metrics -->
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">21</div>
+                        <div class="metric-unit">°C</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">44</div>
+                        <div class="metric-unit">%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">87</div>
+                        <div class="metric-unit">m³</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">417</div>
+                        <div class="metric-unit">GB</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <!-- Weather Widget -->
+                <div class="weather-widget">
+                    <div class="weather-title">Weather Today</div>
+                    <div class="weather-location">San Francisco - 29°C</div>
+                    <div class="weather-status">Sunny</div>
+                    <div class="weather-icon"></div>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart-container">
+                    <img src="graphics.jpeg" alt="Analytics Chart" class="chart-image">
+                </div>
+
+                <!-- Activate Section -->
+                <div class="activate-section">
+                    <div class="activate-left">
+                        <div class="activate-text">Activate Windows</div>
+                        <div class="activate-text">Go to Settings</div>
+                    </div>
+                    <div class="activate-value">417 <span class="activate-unit">GB</span></div>
+                    <div class="settings-icon"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

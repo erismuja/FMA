@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .container{
+            display: grid;
+            grid-template-columns: 1fr  1fr;
+            grid-template-rows: 1fr  1fr;
+            grid-template-areas: 
+            'aside main'
+            'aside main';
+            width: 100vh;
+            height: 100vh;
+        }
+        .aside{
+            grid-area: aside;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 20px;
+            width: 25%;
+            min-width: 200px;
+            text-align: center;
+            align-content: center;
+            font-size: 50px;
+
+        }
+        .main{
+            grid-area: main;
+            
+        }
+        .aside .c1{
+        padding: 10px 20px;
+        background-color: gray;
+        color: white;
+        border-color: white;
+        border-radius: 4px;
+         font-weight: bold;
+        }
+        .main .c2{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-left: 20px;
+        position: absolute;
+         left: 750px;
+         top: 14px;
+        }
+          .main .c4{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-left: 20px;
+        position: absolute;
+         left: 750px;
+         top: 359px;
+        }
+        .main .c3{
+        font-size: 20px;
+        color: black;
+        text-align: left;
+        justify-content: left;
+        display: flex;
+
+        }
+        .main .c5{
+        background-color: green;
+        color: white;
+        border-color: white;
+        }
+        .main .c6{
+            background-color: blue;
+            color: white;
+            border-color: white;
+        }
+        .main .c7{
+            background-color: red;
+            color: white;
+            border-color: white;
+        }
+        @media (max-width:600px){
+            body{
+                grid-template-areas: 
+                "aside"
+                "aside";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                height: auto;
+
+            }
+            .aside{
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="aside">
+    <p>miresevini ne faqen time</p>
+    <button class="c1">Login In</button>
+    </div>
+    <div class="main">
+       <h5>Pined Post</h5> <hr>
+       
+       <p>By Eris Muja <button class="c5">css</button> <button class="c6">html</button></p>
+      <p class="c3">Counter-Strike 2 is a 2023 free-to-play tactical first-person shooter game developed and published by Valve. It is the fifth entry in the Counter-Strike series, developed as an updated version of the previous entry, Counter-Strike: Global Offensive (2012). The game was announced on March 22, 2023, and was released on September 27, 2023, for Windows and Linux, replacing Global Offensive on Steam.</p>
+    <img src="a.jpg" alt="" class="c4">
+    <h5>Resent Post</h5> <hr>
+    <p>By Eris Muja <button class="c7">javascript</button> </p>
+    <p class="c3">Like its predecessor, the game pits two teams, the Counter-Terrorists and the Terrorists, against each other in various objective-based game modes; additional game modes that stray away from this setup are also included. Counter-Strike 2 features major technical improvements over Global Offensive, including a move from the Source game engine to Source 2, improved graphics, and a new "sub-tick" server architecture. In addition, many maps from Global Offensive were updated to take advantage of the features of Source 2, with some maps receiving complete overhauls</p>
+     <img src="b.jpg" alt="" class="c2">
+</div>
+</div>
+    
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Home Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Creative Tim</h2>
+      <div class="profile">Brooklyn Alion</div>
+      <nav>
+        <ul>
+            <button>Dashboards</button>
+          <button> <span>A </span>Analytics </button>
+          <button> <span>D </span>Discover</button>
+          <button> <SPAn>S </SPAn> Sales</button>
+          <button> <span>A </span>Automotive</button>
+          <button class="active"> <span>S </span>Smart Home</button>
+        </ul>
+        <h3>Pages</h3>
+        <ul>
+            <button>Pages</button>
+            <button>Account</button>
+            <button>Application</button>
+            <button>Ecommerce</button>
+            <button>Team</button>
+            <button>Project</button>
+            <button>Authentication</button>
+        </ul><hr>
+        <h3>Docs</h3>
+        <ul>
+           <button>Basic</button>
+            <button>Components</button>
+            <button>Changelog</button>
+        </ul>
+      </nav>
+    </aside>
+  </div>
+  
+
+    <main class="main">
+      <div class="header">
+        <h3> <span class="a1">Pages / </span>Smart Home</h3>
+        <input type="text" placeholder="Search here..." />
+      </div>
+      <div class="notification-container">
+        <div class="bell-icon" tabindex="0">&#128276</div>
+      </div>
+       <div class="notification-container">
+        <div class="settings" tabindex="0">&#9881</div>
+      </div>
+      <div class="notification-container">
+        <div class="profile" tabindex="0">&#128100</div>
+      </div>
+      
+      <div class="camera-box">
+        <div class="camera-header">
+          <span>17.05.2021 4:34PM</span>
+          <span class="recording">● Recording</span>
+        </div>
+        <img src="bg-smart-home-1.jpg" alt="" width="600" class="a8">
+        <img src="graphics.jpeg" alt="" class="a10">
+        <div class="tabs">
+            <h3>Cameras</h3>
+            <div class="a5">
+          <button class="a6" >Kitchen</button>
+          <button >Living</button>
+          <button >Attic</button>
+            </div>
+           
+        </div>
+        
+      </div>
+
+      <div class="stats">
+        <div class="card"><h5>21°c</h5> <p>Living room</p> <h6>Temperature</h6></div>
+        <div class="card"> <h5>44%</h5> <p>Outside</p> <h6>Humidity:</h6> </div>
+        <div class="card"> <h5>87 m³</h5> <p>Water</p> <h6>Consuption</h6> </div>
+        <div class="card"> <h5>417 GB</h5><p>Internet</p><h6>All Devices</h6></div>
+      </div>
+      <div class="a120">
+      <div class="a121"><h3>Device Limit</h3><img src="first-graph.jpeg" alt="">
+      <div class="a123"><h5>Current temperature </h5><span>21°c</span><hr>
+      <h5>Humidity </h5> <span>57%</span></div>
+    </div>
+    <div class="a126"><h3>Consumption by room</h3><img src="second-graph.jpeg" alt="">
+      <div class="a125"><h5>Living room</h5><span>15%</span><hr>
+      <h5>Kitchen </h5> <span>20%</span><hr>
+    <h5>Attic </h5><span>13%</span><hr>
+    <h5>Garage </h5><span>32%</span><hr>
+      <h5>Basment </h5> <span>20%</span></div>
+    
+      </div>
+      </div>
+   
+
+    </main>
+<menu class="menu">
+    <label class="card">
+    <input type="checkbox" />
+    <span class="switch"></span>
+    <div class="card-content">
+      <div class="icon">💧</div>
+      <div class="title">Humidity</div>
+      <div class="status">Inactive since: 2 days</div>
+    </div>
+  </label>
+
+ 
+  <label class="card dark">
+    <input type="checkbox" checked />
+    <span class="switch"></span>
+    <div class="card-content">
+      <div class="icon">🌡️</div>
+      <div class="title">Temperature</div>
+      <div class="status">Active</div>
+    </div>
+  </label>
+
+  
+  <label class="card">
+    <input type="checkbox" />
+    <span class="switch"></span>
+    <div class="card-content">
+      <div class="icon">❄️</div>
+      <div class="title">Air Conditioner</div>
+      <div class="status">Inactive since: 1 hour</div>
+    </div>
+  </label>
+
+  
+  <label class="card">
+    <input type="checkbox" />
+    <span class="switch"></span>
+    <div class="card-content">
+      <div class="icon">💡</div>
+      <div class="title">Lights</div>
+      <div class="status">Inactive since: 27 min</div>
+    </div>
+  </label>
+
+
+  <label class="card dark">
+    <input type="checkbox" checked />
+    <span class="switch"></span>
+    <div class="card-content">
+      <div class="icon">📶</div>
+      <div class="title">Wi-fi</div>
+      <div class="status">Active</div>
+    </div>
+  </label>
+</menu>
+
+ 
+  <div class="card new-device">
+    +<br>New device
+  </div>
+
+</body>
+</html>

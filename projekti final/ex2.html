@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        
+        .notification-bar {
+            background: #6c757d;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        .esc-key {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .dashboard {
+            display: flex;
+            height: calc(100vh - 32px);
+        }
+
+       
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-right: 1px solid #dee2e6;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .user-name {
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 10px;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px 15px;
+            color: #6c757d;
+            background: none;
+            border: none;
+            font-size: 13px;
+            gap: 12px;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .nav-button:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-button.active {
+            background: #333;
+            color: white;
+        }
+
+        .nav-letter {
+            width: 20px;
+            height: 20px;
+            background: currentColor;
+            color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .nav-letter p{
+            color: black;
+        }
+
+        .nav-button.active .nav-letter {
+            background: white;
+            color: #333;
+        }
+
+        .nav-text {
+            font-weight: 500;
+        }
+
+        .nav-section {
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            color: #adb5bd;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        
+        .header {
+            background: white;
+            padding: 15px 25px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumb {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .breadcrumb .current {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            background: #f8f9fa;
+            width: 200px;
+            font-size: 13px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 32px;
+            height: 32px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            position: relative;
+        }
+
+
+        .notification-badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+       
+        .content {
+            flex: 1;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        
+        .camera-section {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .camera-container {
+            position: relative;
+            height: 320px;
+        }
+
+        .camera-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .recording-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #dc3545;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .recording-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .camera-tabs {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            gap: 15px;
+        }
+
+        .camera-tab {
+            padding: 6px 15px;
+            background: #e9ecef;
+            color: #6c757d;
+            border: none;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .camera-tab.active {
+            background: white;
+            color: #333;
+        }
+
+        
+        .data-boxes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .data-box {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .data-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 5px;
+
+        }
+
+        .data-unit {
+            font-size: 14px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        
+        .weather-section {
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .weather-title {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .weather-location {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .weather-status {
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .weather-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 50px;
+            height: 35px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .weather-icon::after {
+            content: '☀️';
+        }
+
+        .chart-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .chart-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+        }
+
+        
+        .settings-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-text {
+            color: #adb5bd;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .settings-value {
+            font-size: 28px;
+            font-weight: 300;
+            color: #e91e63;
+        }
+
+        .settings-unit {
+            font-size: 12px;
+            color: #adb5bd;
+        }
+
+        .settings-icon {
+            width: 18px;
+            height: 18px;
+            background: #dee2e6;
+            border-radius: 3px;
+        }
+        .nav-menu hr{
+            filter: blur(2px);
+            padding-top: 10px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    
+    
+
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Creative Tim</span>
+            </div>
+            
+            <div class="user-profile">
+                <div class="user-avatar">BA</div>
+                <span class="user-name">Brooklyn Alice</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li>
+                    <button class="nav-button">
+                        <div class="nav-letter"><p>D</p></div>
+                        <span class="nav-text">Dashboards</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button">
+                        <div class="nav-letter"><p>A</p></div>
+                        <span class="nav-text">Analytics</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button">
+                        <div class="nav-letter"><p>D</p></div>
+                        <span class="nav-text">Discover</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button">
+                        <div class="nav-letter"><p>S</p></div>
+                        <span class="nav-text">Sales</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button">
+                        <div class="nav-letter"><p>A</p></div>
+                        <span class="nav-text">Automotive</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-button active">
+                        <div class="nav-letter"><p>S</p></div>
+                        <span class="nav-text">Smart Home</span>
+                    </button>
+                </li>
+            </ul>
+
+            <div class="nav-section">
+                <div class="nav-section-title">PAGES</div>
+                <ul class="nav-menu">
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>P</p></div>
+                            <span class="nav-text">Pages</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Account</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Applications</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>E</p></div>
+                            <span class="nav-text">Ecommerce</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>T</p></div>
+                            <span class="nav-text">Team</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>P</p></div>
+                            <span class="nav-text">Projects</span>
+                        </button>
+                    </li>
+                       <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Authentication</span>
+                        </button>
+                    </li>
+                    <hr>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">PAGES</div>
+                <ul class="nav-menu">
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>P</p></div>
+                            <span class="nav-text">Pages</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Account</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Applications</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>E</p></div>
+                            <span class="nav-text">Ecommerce</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>T</p></div>
+                            <span class="nav-text">Team</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>P</p></div>
+                            <span class="nav-text">Projects</span>
+                        </button>
+                    </li>
+                       <li>
+                        <button class="nav-button">
+                            <div class="nav-letter"><p>A</p></div>
+                            <span class="nav-text">Authentication</span>
+                        </button>
+                    </li>
+                    <hr>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="main-content">
+            <div class="header">
+                <div class="breadcrumb">
+                    Pages / <span class="current">Smart Home</span>
+                </div>
+                <div class="header-right">
+                    <input type="text" class="search-box" placeholder="Search here">
+                    <div class="header-icons">
+                        <div class="header-icon"><i class="fa-regular fa-face-smile icon"></i></div>
+                        <div class="header-icon"></div>
+                        <div class="header-icon">
+                            <div class="notification-badge">11</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="content">
+                <div class="left-column">
+                    <div class="camera-section">
+                        <div class="camera-container">
+                            <img src="bg-smart-home-1.jpg" alt="Camera" class="camera-image">
+                            <div class="camera-overlay">17.05.2021 4:34PM</div>
+                            <div class="recording-badge">
+                                <div class="recording-dot"></div>
+                                RECORDING
+                            </div>
+                        </div>
+                        <div class="camera-tabs">
+                            <button class="camera-tab active">Cameras</button>
+                            <button class="camera-tab">Kitchen</button>
+                            <button class="camera-tab">Living</button>
+                            <button class="camera-tab">Attic</button>
+                            <button class="camera-tab">⋯</button>
+                        </div>
+                    </div>
+
+                   
+                    <div class="data-boxes">
+                        <div class="data-box">
+                            <div class="data-value">21</div>
+                            <div class="data-unit">°C</div>
+                        </div>
+                        <div class="data-box">
+                            <div class="data-value">44</div>
+                            <div class="data-unit">%</div>
+                        </div>
+                        <div class="data-box">
+                            <div class="data-value">87</div>
+                            <div class="data-unit">m³</div>
+                        </div>
+                        <div class="data-box">
+                            <div class="data-value">417</div>
+                            <div class="data-unit">GB</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="weather-section">
+                        <div class="weather-title">Weather Today</div>
+                        <div class="weather-location">San Francisco - 29°C</div>
+                        <div class="weather-status">Sunny</div>
+                        <div class="weather-icon"></div>
+                    </div>
+
+                  
+                    <div class="chart-section">
+                        <img src="graphics.jpeg" alt="Chart" class="chart-image">
+                    </div>
+
+                    
+                    <div class="settings-section">
+                        <div>
+                            <div class="settings-text">Activate Windows</div>
+                            <div class="settings-text">Go to Settings</div>
+                        </div>
+                        <div class="settings-value">417 <span class="settings-unit">GB</span></div>
+                        <div class="settings-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

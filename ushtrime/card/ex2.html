@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marvel Comic Card</title>
+  <style>
+ body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 300px;
+  border: 4px solid black;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  background-color: white;
+  border-radius: 10px;
+}
+
+.top-row {
+  display: flex;
+  height: 120px;
+  border-bottom: 4px solid black;
+  border-radius: 10px;
+}
+
+.price-box {
+  width: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.date-box {
+  width: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.date-box .day {
+  font-size: 36px;
+  border-radius: 10px;
+}
+
+.date-box .month {
+  font-size: 20px;
+  margin-top: -5px;
+  border-radius: 10px;
+}
+
+.date-box .code {
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 10px;
+}
+
+.main-content {
+  background-color: #a32020;
+  position: relative;
+  height: 400px;
+  text-align: center;
+}
+
+.copyright {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  line-height: 1.2;
+}
+
+.hero-img {
+  background-size: cover;
+  width: 270px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top-row">
+      <div class="price-box">40c</div>
+      <div class="date-box">
+        <div class="day">29</div>
+        <div class="month">JAN</div>
+        <div class="code">02461</div>
+      </div>
+    </div>
+    <div class="main-content">
+      <p class="copyright">1979 Marvel<br>Comics Group</p>
+      <img src="iron.jpg" alt="Deadpool" class="hero-img">
+    </div>
+  </div>
+</body>
+</html>

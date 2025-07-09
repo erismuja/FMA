@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidebar Menu</title>
+  <link rel="stylesheet" href="stylee.css" />
+</head>
+<body>
+    <div class="container">
+  <div class="sidebar">
+    <div class="logo">
+      <h3>Creative Tim</h3>
+    </div>
+    <div class="profile">
+      <img src="https://i.pravatar.cc/40" alt="Profile" />
+      <span>Brooklyn Alice</span>
+    </div>
+    
+    <div class="section">
+      <p class="section-title">Dashboards</p>
+      <ul class="menu">
+        <li>A Analytics</li>
+        <li>D Discover</li>
+        <li>S Sales</li>
+        <li>A Automotive</li>
+        <li class="active">S Smart Home</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-title">PAGES</p>
+      <ul class="menu icons">
+        <li>📄 Pages</li>
+        <li>👤 Account</li>
+        <li>🔢 Applications</li>
+        <li>🛒 Ecommerce</li>
+        <li>👥 Team</li>
+        <li>🔲 Projects</li>
+      </ul>
+    </div>
+  </div>
+   <div class="main">
+    <div class="top-bar">
+      <span class="breadcrumb">Pages / <strong>Smart Home</strong></span>
+      <input type="text" placeholder="Search here" class="search-box"/>
+      <div class="icons">
+        <span>⚙️</span>
+        <span class="notif">
+          🔔<span class="badge">11</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <div class="card camera-card">
+        <div class="camera-header">
+          <span>17.05.2021 4:34PM</span>
+          <span class="recording">🔴 RECORDING</span>
+        </div>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Kitchen" class="camera-img">
+        <div class="camera-footer">
+          <span>Cameras</span>
+          <div class="camera-buttons">
+            <button class="active">Kitchen</button>
+            <button>Living</button>
+            <button>Attic</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card weather-card">
+        <div class="weather-header">
+          <div>
+            <p class="title">Wheather Today</p>
+            <p class="city">San Francisco - 29°C</p>
+          </div>
+          <div class="sunny">🌤️ Sunny</div>
+        </div>
+        <div class="chart-placeholder">
+          <div class="bar" style="height: 60%"></div>
+          <div class="bar" style="height: 75%"></div>
+          <div class="bar" style="height: 70%"></div>
+          <div class="bar" style="height: 85%"></div>
+          <div class="bar" style="height: 70%"></div>
+          <div class="bar" style="height: 68%"></div>
+          <div class="bar" style="height: 72%"></div>
+        </div>
+        <div class="days">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

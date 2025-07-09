@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            height: 50px;
+            width: 50px;
+            background-color: blue;
+            color: white;
+            position: relative;
+            animation-name: eris;
+            animation-delay: 2s;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            border: 5px solid red;
+            border-radius: 50px;
+        }
+        @keyframes eris {
+            0%{ left: 0px;top:0px;}
+            25%{left: 200px; top: 0px;}
+            50%{left: 200px; top: 200px;}
+            75%{left: 0px; top: 200px;}
+            100%{left: 0px; top: 0px;}
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    
+</body>
+</html>

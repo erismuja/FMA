@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Layout</title>
+ <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.c1 {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "menu main aside"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 100px;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+  background-color: peachpuff;
+  padding: 20px;
+  font-weight: bold;
+}
+
+.menu {
+  grid-area: menu;
+  background-color: #b6ff33;
+  padding: 20px;
+}
+
+.aside {
+  grid-area: aside;
+  background-color: red;
+  color: white;
+  padding: 20px;
+}
+
+.main {
+  grid-area: main;
+  padding: 20px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-weight: bold;
+}
+
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.product {
+  background-color: gray;
+  color: white;
+  flex: 1 0 18%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  display: grid;
+  grid-template-columns: 30px;
+  box-shadow: 10px;
+  
+
+
+}
+
+ </style>
+</head>
+<body>
+  <div class="c1">
+    <header class="header">The Header</header>
+    <nav class="menu">Navigation Menu</nav>
+    <aside class="aside">Some ads</aside>
+    <main class="main">
+      <div class="products">
+        
+        <div class="product" >makiato</div>
+        <div  class="product">ekspres</div>
+        <div class="product" >nescafe</div>
+        <div class="product" >coca cola</div>
+        <div  class="product">birre peja</div>
+                <div  class="product">sprite</div>
+        <div  class="product">fanta</div>
+
+        <div class="product" >lasko</div>
+        <div  class="product">uje i thjeshte</div>
+        <div  class="product">uje i tharpt</div>
+        
+      </div>
+    </main>
+    <footer class="footer">The Footer</footer>
+  </div>
+</body>
+</html>

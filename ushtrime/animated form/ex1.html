@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+        div{
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            padding: 20px;
+            animation-duration: 2s;
+            animation-delay: 1s;
+        }
+       
+        
+        div input{
+            border: 2px solid black;
+            box-shadow: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-left: 20px;
+            
+        }
+        div button{
+            border-radius: 20px;
+            width: 60px;
+            margin-top: 10px;
+            margin-left: 20px;
+            background-color: blue;
+            color: white;
+        }
+       
+        
+   
+        .a2:hover {
+            opacity: 3;
+            overflow: unset;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div>
+        <div class="a2">
+     <input type="First Name" name="First Name" placeholder="First Name" required>
+    <div class="a5">Enter a valid first name</div></div>
+     <div class="a2">
+     <input type="Last Name" name="Last Name" placeholder="Last Name" required>
+    <div class="a5">Enter a valid last name</div></div>
+     <div class="a2">
+     <input type="Email" name="Email" placeholder="Email" required> 
+     <div class="a5">Enter a valid email</div>
+    </div>
+     <button>Submit</button>
+    </div>
+    
+</body>
+</html>
